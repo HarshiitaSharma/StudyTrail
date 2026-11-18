@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StudyTrail</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <header class="top">
+    <h1>StudyTrail<span>.</span></h1>
+    <div id="who" hidden><span id="hello"></span> <button id="logoutBtn" class="ghost">Log out</button></div>
+  </header>
+
+  <section id="authView" class="card narrow" hidden>
+    <div class="tabs" role="tablist">
+      <button id="tabLogin" role="tab" aria-selected="true">Log in</button>
+      <button id="tabRegister" role="tab" aria-selected="false">Create account</button>
+    </div>
+    <form id="loginForm">
+      <label>Email <input type="email" id="loginEmail" autocomplete="username" required></label>
+      <label>Password <input type="password" id="loginPassword" autocomplete="current-password" required></label>
+      <button class="primary">Log in</button>
+    </form>
+    <form id="registerForm" hidden>
+      <label>Name <input type="text" id="regName" maxlength="40" autocomplete="name" required></label>
+      <label>Email <input type="email" id="regEmail" autocomplete="username" required></label>
+      <label>Password <small>(at least 8 characters)</small> <input type="password" id="regPassword" minlength="8" autocomplete="new-password" required></label>
+      <button class="primary">Create account</button>
+    </form>
+    <p id="authMsg" class="msg" role="alert"></p>
+  </section>
+
+  <div id="appView" hidden>
+    <section class="stats">
+      <div class="card"><span class="lbl">Today</span><b id="sToday">0m</b></div>
+      <div class="card"><span class="lbl">Last 7 days</span><b id="sWeek">0m</b>
+        <div class="bar"><i id="goalBar"></i></div><small id="goalTxt"></small></div>
+      <div class="card"><span class="lbl">Streak</span><b id="sStreak">0</b><small>days in a row</small></div>
+    </section>
+
+    <section class="card">
+      <h2>Last 14 days</h2>
+      <svg id="chart" viewBox="0 0 560 140" role="img" aria-label="Study minutes per day for the last 14 days"></svg>
+      <ul id="breakdown" class="legend"></ul>
+    </section>
+
+    <section class="card">
+      <h2>Log a session</h2>
+      <form id="logForm" class="grid">
+        <label>Subject <select id="logSubject" required></select></label>
+        <label>Minutes <input type="number" id="logMinutes" min="1" max="1440" value="30" required></label>
+        <label>Date <input type="date" id="logDay"></label>
+        <label class="wide">Note <input type="text" id="logNote" maxlength="200" placeholder="optional"></label>
+        <button class="primary">Add</button>
+      </form>
+      <p id="logMsg" class="msg" role="status"></p>
+    </section>
+
+    <section class="card">
+      <h2>Subjects</h2>
+      <form id="subjectForm" class="row">
+        <input type="text" id="subName" maxlength="40" placeholder="e.g. Polity" aria-label="Subject name" required>
+        <input type="color" id="subColor" value="#2f7d6b" aria-label="Subject color">
+        <button class="primary">Add subject</button>
+      </form>
+      <ul id="subjectList" class="chips"></ul>
+    </section>
+
+    <section class="card">
+      <h2>Recent sessions</h2>
+      <ul id="sessionList" class="list"></ul>
+    </section>
+
+    <section class="card">
+      <h2>Settings</h2>
+      <form id="goalForm" class="row"><label>Weekly goal (minutes) <input type="number" id="goalInput" min="0" max="10080"></label><button>Save goal</button></form>
+      <p><a href="/api/export.csv" download>Download all sessions as CSV</a></p>
+      <details><summary>Change password</summary>
+        <form id="pwForm" class="grid">
+          <label>Current <input type="password" id="pwCur" autocomplete="current-password" required></label>
+          <label>New <input type="password" id="pwNew" minlength="8" autocomplete="new-password" required></label>
+          <button>Change</button>
+        </form>
+      </details>
+      <details><summary>Delete account</summary>
+        <form id="delForm" class="row">
+          <input type="password" id="delPw" placeholder="Your password" autocomplete="current-password" required>
+          <button class="danger">Delete everything</button>
+        </form>
+      </details>
+      <p id="setMsg" class="msg" role="status"></p>
+    </section>
+  </div>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
