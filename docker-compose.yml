@@ -1,0 +1,10 @@
+services:
+  web:
+    build: .
+    ports: ["8000:8000"]
+    environment:
+      SECRET_KEY: ${SECRET_KEY:?Set SECRET_KEY, for example in a .env file}
+      COOKIE_SECURE: ${COOKIE_SECURE:-0}
+    volumes: ["studytrail-data:/data"]
+volumes:
+  studytrail-data:
